@@ -1,0 +1,27 @@
+//! Overwriting Laravel defaults with custom sass
+
+/**
+* MyMethod
+* * All font-includes
+* TODO: remove all redundant font-includes
+*/
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+/**
+* * Typography
+*/
+h1, h2, h3, h4 {
+    font-family: 'Raleway', sans-serif;
+}
+
+/**
+* * Navigation
+*/
+nav.navbar {
+    a.navbar-brand { 
+        font-family: 'Raleway', sans-serif; 
+        &:hover {
+            opacity: .8;
+        }
+    }
+}
