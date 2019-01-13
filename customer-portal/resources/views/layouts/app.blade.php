@@ -9,7 +9,10 @@
 </head>
 
 <body>
-    @yield('content')
+    @include('inc.nav')
+    <div class="container">
+        @yield('content')
+    </div>
 </body>
 
 </html>
