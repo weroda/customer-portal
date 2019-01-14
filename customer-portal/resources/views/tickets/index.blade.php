@@ -9,7 +9,6 @@
                 <div class="card card-body">
                     <h3>{{$ticket->title}}</h3>
                     <small>Created at: {{$ticket->created_at}}</small>
-                    <p>{{$ticket->body}}</p>
                 </div>
             </a>
         @endforeach

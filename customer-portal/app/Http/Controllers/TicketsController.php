@@ -25,7 +25,7 @@ class TicketsController extends Controller
      */
     public function create()
     {
-        //
+        return view('tickets.create');
     }
 
     /**
@@ -36,7 +36,20 @@ class TicketsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        /*
+        * * Create new ticket
+        */
+        $ticket = new Ticket;
+        $ticket->title = $request->input('title');
+        $ticket->body = $request->input('body');
+        $ticket->save();
+
+        return redirect('/tickets')->with('success', 'Ticket Created');
     }
 
     /**
@@ -59,7 +72,8 @@ class TicketsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ticket = Ticket::find($id);
+        return view('tickets.edit')->with('ticket', $ticket);
     }
 
     /**
@@ -71,7 +85,20 @@ class TicketsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        /*
+        * * Create new ticket
+        */
+        $ticket = Ticket::find($id);
+        $ticket->title = $request->input('title');
+        $ticket->body = $request->input('body');
+        $ticket->save();
+
+        return redirect('/tickets')->with('success', 'Ticket Updated');
     }
 
     /**
@@ -82,6 +109,8 @@ class TicketsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ticket = Ticket::find($id);
+        $ticket->delete();
+        return redirect('/tickets')->with('success', 'Ticket Removed');
     }
 }

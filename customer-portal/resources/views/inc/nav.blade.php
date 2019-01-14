@@ -17,5 +17,8 @@
                 <a class="nav-link" href="/about">About</a>
             </li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/tickets/create">New Ticket</a></li>
+        </ul>
     </div>
 </nav>

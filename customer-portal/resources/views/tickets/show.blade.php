@@ -6,10 +6,19 @@
     
     <h1>{{$ticket->title}}</h1>
 
-    <p>{{$ticket->body}}</p>
+    <p>{!!$ticket->body!!}</p>
 
     <hr>
 
     <small>Written on: {{$ticket->created_at}}</small>
+
+    <hr>
+
+    <a class="btn btn-primary" href="/tickets/{{$ticket->id}}/edit">Edit</a>
+    
+    {!!Form::open(['action' => ['TicketsController@destroy', $ticket->id], 'method' => 'POST'])!!}
+        {{Form::hidden('_method', 'DELETE')}}
+        {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+    {!!Form::close()!!}
 
 @endsection 
