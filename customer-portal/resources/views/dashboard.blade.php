@@ -41,15 +41,28 @@
                                 <th>Delete</th>
                             </tr>
                             @foreach ($tickets as $ticket)
+                                <?php
+                                    $message = '';
+                                    $active = '';
+                                    if($ticket->activity == 0) {
+                                        $active = 'disabled';
+                                        $message = 'CLOSED';
+                                    }
+                                ?>
                                 <tr>
-                                    <td>{{$ticket->title}}</td>
+                                    <td>
+                                        {{$ticket->title}} <br>
+                                        @if($message !== '')
+                                            <span class="ticket-closed">{{$message}}</span>
+                                        @endif
+                                    </td>
                                     <td>#{{$ticket->id}}</td>
-                                    <td><a class="btn btn-primary" href="/tickets/{{$ticket->id}}">View</a></td>
-                                    <td><a class="btn btn-warning" href="/tickets/{{$ticket->id}}/edit">Edit</a></td>
+                                <td><a class="btn btn-primary" href="/tickets/{{$ticket->id}}">View</a></td>
+                                    <td><a class="btn btn-warning {{$active}}" href="/tickets/{{$ticket->id}}/edit">Edit</a></td>
                                     <td>
                                         {!!Form::open(['action' => ['TicketsController@destroy', $ticket->id], 'method' => 'POST'])!!}
                                             {{Form::hidden('_method', 'DELETE')}}
-                                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                            {{Form::submit('Delete', ['class' => 'btn btn-danger ' . $active])}}
                                         {!!Form::close()!!}
                                     </td>
                                 </tr>

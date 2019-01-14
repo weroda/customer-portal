@@ -10541,6 +10541,14 @@ div.card div.card-body h3 {
   text-align: center;
 }
 
+div.card span.ticket-closed {
+  background-color: #e3342f;
+  color: #f8fafc;
+  font-size: 10px;
+  padding: 5px;
+  font-weight: bold;
+}
+
 /**
 * * Navigation
 */

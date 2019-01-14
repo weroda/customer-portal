@@ -34,6 +34,14 @@ div.card {
             text-align: center;
         }
     }
+    // Ticket closed
+    span.ticket-closed {
+        background-color: $red;
+        color: $white;
+        font-size: 10px;
+        padding: 5px;
+        font-weight: bold;
+    }
 }
 
 /**

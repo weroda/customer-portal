@@ -116,6 +116,7 @@ class TicketsController extends Controller
         $ticket->attachment_1 = $fileNameToStore_1;
         $ticket->attachment_2 = $fileNameToStore_2;
         $ticket->attachment_3 = $fileNameToStore_3;
+        $ticket->activity = true;
 
         $ticket->save();
 
@@ -175,6 +176,13 @@ class TicketsController extends Controller
         $ticket = Ticket::find($id);
         $ticket->title = $request->input('title');
         $ticket->body = $request->input('body');
+        
+        // ticket activity check
+        $activity = true;
+        if($request->input('activity') == null) {
+            $activity = false;
+        }
+        $ticket->activity = $activity;
         $ticket->save();
 
         return redirect('/tickets')->with('success', 'Ticket Updated');

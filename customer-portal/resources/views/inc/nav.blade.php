@@ -12,7 +12,7 @@
                 @auth
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Dashboard <span class="ticket-count">{{count($tickets)}}</span></a>
+                        <a class="nav-link" href="/dashboard">Dashboard</span></a>
                     </li>
                 </ul>
                 @endauth
