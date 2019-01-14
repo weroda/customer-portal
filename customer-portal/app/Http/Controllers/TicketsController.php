@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Ticket;
 
 class TicketsController extends Controller
@@ -49,8 +50,61 @@ class TicketsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            // Image max: 1999 [default apache 2MB]
+            'attachment_1' => 'image|nullable|max:1999',
+            'attachment_2' => 'image|nullable|max:1999',
+            'attachment_3' => 'image|nullable|max:1999',
         ]);
+
+        /**
+         * * Handle file upload
+         */
+        // attachment 1
+        if($request->hasFile('attachment_1')) {
+            // get filename with extension
+            $fileNameWithExt = $request->file('attachment_1')->getClientOriginalName();
+            // get just filename
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            // get just extension
+            $extension = $request->file('attachment_1')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore_1 = $fileName . '_' . time() . '.' . $extension;
+            // upload image
+            $path = $request->file('attachment_1')->storeAs('public/attachment_images', $fileNameToStore_1);
+        } else {
+            $fileNameToStore_1 = '';
+        }
+        // attachment 2
+        if($request->hasFile('attachment_2')) {
+            // get filename with extension
+            $fileNameWithExt = $request->file('attachment_2')->getClientOriginalName();
+            // get just filename
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            // get just extension
+            $extension = $request->file('attachment_2')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore_2 = $fileName . '_' . time() . '.' . $extension;
+            // upload image
+            $path = $request->file('attachment_2')->storeAs('public/attachment_images', $fileNameToStore_2);
+        } else {
+            $fileNameToStore_2 = '';
+        }
+        // attachment 3
+        if($request->hasFile('attachment_3')) {
+            // get filename with extension
+            $fileNameWithExt = $request->file('attachment_3')->getClientOriginalName();
+            // get just filename
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            // get just extension
+            $extension = $request->file('attachment_3')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore_3 = $fileName . '_' . time() . '.' . $extension;
+            // upload image
+            $path = $request->file('attachment_3')->storeAs('public/attachment_images', $fileNameToStore_3);
+        } else {
+            $fileNameToStore_3 = '';
+        }
 
         /*
         * * Create new ticket
@@ -59,6 +113,10 @@ class TicketsController extends Controller
         $ticket->title = $request->input('title');
         $ticket->body = $request->input('body');
         $ticket->user_id = auth()->user()->id;
+        $ticket->attachment_1 = $fileNameToStore_1;
+        $ticket->attachment_2 = $fileNameToStore_2;
+        $ticket->attachment_3 = $fileNameToStore_3;
+
         $ticket->save();
 
         return redirect('/tickets')->with('success', 'Ticket Created');
@@ -138,6 +196,10 @@ class TicketsController extends Controller
          */
         if(auth()->user()->id !== $ticket->user_id) {
             return redirect('/tickets')->with('error', 'You do not have permission to view this page.');    
+        }
+
+        if($ticket->attachment_1 != '') {
+            Storage::delete('public/attachment_images/' . $ticket->attachment_1);
         }
 
         $ticket->delete();

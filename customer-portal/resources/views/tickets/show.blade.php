@@ -14,6 +14,24 @@
 
     <hr>
 
+    <h2>Attachments</h2>
+
+    @if($ticket->attachment_1 !== '')
+        <span class="attachmentImageTitle">Attachment 1:</span>
+        <img src="/storage/attachment_images/{{$ticket->attachment_1}}" alt="">
+    @endif
+
+    @if($ticket->attachment_2 !== '')
+        <span class="attachmentImageTitle">Attachment 2:</span>
+        <img src="/storage/attachment_images/{{$ticket->attachment_2}}" alt="">
+    @endif
+    
+    @if($ticket->attachment_3 !== '')
+        <span class="attachmentImageTitle">Attachment 3:</span>
+        <img src="/storage/attachment_images/{{$ticket->attachment_3}}" alt="">
+    @endif
+    
+
     @if(!Auth::guest())
         @if(Auth::user()->id == $ticket->user_id)
             <a class="btn btn-primary" href="/tickets/{{$ticket->id}}/edit">Edit</a>

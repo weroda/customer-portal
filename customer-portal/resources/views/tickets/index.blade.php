@@ -12,7 +12,10 @@
                 </div>
             </a>
         @endforeach
+        
+        {{-- pagination --}}
         {{$tickets->links()}}
+        
     @else
         <p>No tickets</p>
     @endif
