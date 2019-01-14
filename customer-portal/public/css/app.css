@@ -10508,6 +10508,13 @@ h4 {
   font-family: "Raleway", sans-serif;
 }
 
+p,
+li,
+span {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+}
+
 /**
 * * Navigation
 */
