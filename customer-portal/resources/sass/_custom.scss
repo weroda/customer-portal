@@ -1,5 +1,5 @@
 //! Overwriting Laravel defaults with custom sass
-
+@import '_variables';
 /**
 * MyMethod
 * * All font-includes
@@ -11,9 +11,9 @@
 * * Typography
 */
 h1, h2, h3, h4 {
-    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
 }
-p, li, span {
+h1, h2, h3, h4, p, li, span {
     font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
 }
@@ -22,10 +22,22 @@ p, li, span {
 * * Navigation
 */
 nav.navbar {
-    a.navbar-brand { 
-        font-family: 'Raleway', sans-serif; 
+    background-color: $orange;
+    a.navbar-brand img {
+        height: 50px;
         &:hover {
             opacity: .8;
+        }
+    }
+    a.dropdown-item {
+        color: $black;
+    }
+    li.nav-item a.nav-link {
+        opacity: .8;
+        color: $white;
+        &:hover, &:focus {
+            opacity: 1;
+            color: $white;
         }
     }
 }
