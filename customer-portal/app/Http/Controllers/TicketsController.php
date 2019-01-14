@@ -27,7 +27,7 @@ class TicketsController extends Controller
     public function index()
     {
         $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(10);
-        return view('tickets.index')->with('tickets', $tickets);
+        return view('dashboard')->with('tickets', $tickets);
     }
 
     /**

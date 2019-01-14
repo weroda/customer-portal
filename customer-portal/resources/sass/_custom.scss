@@ -41,6 +41,13 @@ div.card {
 */
 nav.navbar {
     background-color: $orange;
+    span.ticket-count {
+        background-color: $white;
+        color: $orange;
+        font-weight: bolder;
+        padding: 0 7px;
+        border-radius: 5px;
+    }
     a.navbar-brand img {
         height: 50px;
         &:hover {

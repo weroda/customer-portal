@@ -10549,6 +10549,14 @@ nav.navbar {
   background-color: #f6993f;
 }
 
+nav.navbar span.ticket-count {
+  background-color: #f8fafc;
+  color: #f6993f;
+  font-weight: bolder;
+  padding: 0 7px;
+  border-radius: 5px;
+}
+
 nav.navbar a.navbar-brand img {
   height: 50px;
 }

@@ -9,16 +9,22 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-
                 @auth
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/tickets/create">New ticket</a>
+                        <a class="nav-link" href="/dashboard">Dashboard <span class="ticket-count">{{count($tickets)}}</span></a>
                     </li>
                 </ul>
+                @endauth
+
+                @auth
+                    <div class="justify-content-md-center">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/tickets/create"><i class="fas fa-plus"></i> New ticket</a>
+                            </li>
+                        </ul>
+                    </div>    
                 @endauth
 
                 <!-- Right Side Of Navbar -->
