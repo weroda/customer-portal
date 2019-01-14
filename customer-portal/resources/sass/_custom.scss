@@ -15,7 +15,25 @@ h1, h2, h3, h4 {
 }
 h1, h2, h3, h4, p, li, span {
     font-family: 'Open Sans', sans-serif;
+}
+p, li, span {
     font-size: 1rem;
+}
+h1 {
+    text-align: center;
+    margin: 50px 0;
+}
+
+/*
+* * Card
+*/
+div.card {
+    margin: 25px 0;
+    div.card-body {
+        h3 {
+            text-align: center;
+        }
+    }
 }
 
 /**

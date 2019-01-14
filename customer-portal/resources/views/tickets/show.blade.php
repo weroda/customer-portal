@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <a class="btn btn-primary" role="button" href="/tickets">Go back</a>
+    <a class="btn btn-primary" role="button" href="/dashboard">Go back</a>
     
     <h1>{{$ticket->title}}</h1>
 
