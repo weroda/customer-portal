@@ -7,6 +7,17 @@ use App\Ticket;
 
 class TicketsController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -74,6 +85,15 @@ class TicketsController extends Controller
     public function edit($id)
     {
         $ticket = Ticket::find($id);
+
+        /**
+         * ! Make sure user is authorized to make changes
+         * Check if the client owns the ticket
+         */
+        if(auth()->user()->id !== $ticket->user_id) {
+            return redirect('/tickets')->with('error', 'You do not have permission to view this page.');    
+        }
+
         return view('tickets.edit')->with('ticket', $ticket);
     }
 
@@ -111,7 +131,16 @@ class TicketsController extends Controller
     public function destroy($id)
     {
         $ticket = Ticket::find($id);
+        
+        /**
+         * ! Make sure user is authorized to make changes
+         * Check if the client owns the ticket
+         */
+        if(auth()->user()->id !== $ticket->user_id) {
+            return redirect('/tickets')->with('error', 'You do not have permission to view this page.');    
+        }
+
         $ticket->delete();
-        return redirect('/tickets')->with('success', 'Ticket Removed');
+        return redirect('/tickets')->with('success', 'Ticket removed successfully');
     }
 }

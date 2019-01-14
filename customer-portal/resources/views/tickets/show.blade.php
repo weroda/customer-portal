@@ -14,11 +14,15 @@
 
     <hr>
 
-    <a class="btn btn-primary" href="/tickets/{{$ticket->id}}/edit">Edit</a>
-    
-    {!!Form::open(['action' => ['TicketsController@destroy', $ticket->id], 'method' => 'POST'])!!}
-        {{Form::hidden('_method', 'DELETE')}}
-        {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-    {!!Form::close()!!}
+    @if(!Auth::guest())
+        @if(Auth::user()->id == $ticket->user_id)
+            <a class="btn btn-primary" href="/tickets/{{$ticket->id}}/edit">Edit</a>
+            
+            {!!Form::open(['action' => ['TicketsController@destroy', $ticket->id], 'method' => 'POST'])!!}
+                {{Form::hidden('_method', 'DELETE')}}
+                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+            {!!Form::close()!!}
+        @endif
+    @endif
 
 @endsection 
