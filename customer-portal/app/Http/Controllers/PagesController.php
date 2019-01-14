@@ -6,15 +6,23 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+     /**
+     * Shield index from guests
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
      * 
      */
     public function index() 
     {
-        $data = array(
-            'title' => 'weroda'
-        );
-        return view('pages.index')->with($data);
+        return redirect('/dashboard');
     }
 
     public function about()

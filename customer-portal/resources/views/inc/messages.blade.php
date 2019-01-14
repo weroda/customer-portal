@@ -17,3 +17,9 @@
         {{session('error')}}
     </div>
 @endif
+
+@if(session('welcome'))
+    <div class="alert alert-primary">
+        {{session('welcome')}}
+    </div>
+@endif
