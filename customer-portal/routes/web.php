@@ -13,3 +13,8 @@
 
 Route::Get('/', 'PagesController@index');
 Route::Get('/about', 'PagesController@about');
+
+/**
+ * * Creates all routes for Tickets
+ */
+Route::resource('tickets', 'TicketsController');
