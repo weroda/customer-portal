@@ -47,6 +47,7 @@ class TicketsController extends Controller
         $ticket = new Ticket;
         $ticket->title = $request->input('title');
         $ticket->body = $request->input('body');
+        $ticket->user_id = auth()->user()->id;
         $ticket->save();
 
         return redirect('/tickets')->with('success', 'Ticket Created');

@@ -8,7 +8,7 @@
             <a href="/tickets/{{$ticket->id}}">
                 <div class="card card-body">
                     <h3>{{$ticket->title}}</h3>
-                    <small>Created at: {{$ticket->created_at}}</small>
+                    <small>Created at: {{$ticket->created_at}} | Written by: {{$ticket->user->name}}</small>
                 </div>
             </a>
         @endforeach

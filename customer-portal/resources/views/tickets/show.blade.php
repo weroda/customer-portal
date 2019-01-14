@@ -10,7 +10,7 @@
 
     <hr>
 
-    <small>Written on: {{$ticket->created_at}}</small>
+    <small>Written on: {{$ticket->created_at}} | Written by: {{$ticket->user->name}}</small>
 
     <hr>
 
