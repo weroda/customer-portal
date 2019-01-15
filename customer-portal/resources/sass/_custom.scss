@@ -25,6 +25,15 @@ h1 {
 }
 
 /*
+* * Buttons
+*/
+button.btn {
+    &.btn-light {
+        border: 1px solid $black;
+    }
+}
+
+/*
 * * Card
 */
 div.card {

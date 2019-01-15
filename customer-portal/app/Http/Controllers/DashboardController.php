@@ -22,10 +22,21 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        return view('dashboard')->with('tickets', $user->tickets);
+        
+        $filter = $request->route('filter');
+        if($filter == 'open') {
+            return view('dashboard')->with('tickets', $user->tickets->where('activity', 1));
+        } elseif ($filter == 'closed') {
+            return view('dashboard')->with('tickets', $user->tickets->where('activity', 0));
+        } else {
+            return view('dashboard')->with('tickets', $user->tickets);
+        }
+        
     }
+
+
 }

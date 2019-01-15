@@ -24,7 +24,7 @@ class TicketsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(10);
         return view('dashboard')->with('tickets', $tickets);

@@ -31,6 +31,18 @@
             <div class="card">
                 <div class="card-body">
                     <h3>Your tickets</h3>
+
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Filter tickets
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/">Show all</a>
+                            <a class="dropdown-item" href="/dashboard/open">Show open</a>
+                            <a class="dropdown-item" href="/dashboard/closed">Show closed</a>
+                        </div>
+                      </div>
+
                     @if(count($tickets) > 0)
                         <table class="table">
                             <tr>
