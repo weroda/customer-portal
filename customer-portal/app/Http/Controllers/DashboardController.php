@@ -26,15 +26,29 @@ class DashboardController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        
+        $query = $request->input('query');
         $filter = $request->route('filter');
+        
         if($filter == 'open') {
-            return view('dashboard')->with('tickets', $user->tickets->where('activity', 1));
+            if($query !== null) {
+                return view('dashboard')->with('tickets', $user->tickets->where('activity', 1)->where('title', 'LIKE', $query));
+            } else {
+                return view('dashboard')->with('tickets', $user->tickets->where('activity', 1));
+            }            
         } elseif ($filter == 'closed') {
-            return view('dashboard')->with('tickets', $user->tickets->where('activity', 0));
+            if($query !== null) {
+                return view('dashboard')->with('tickets', $user->tickets->where('activity', 0)->where('title', 'LIKE', $query));
+            } else {
+                return view('dashboard')->with('tickets', $user->tickets->where('activity', 0));
+            }   
         } else {
-            return view('dashboard')->with('tickets', $user->tickets);
+            if($query !== null) {
+                return view('dashboard')->with('tickets', $user->tickets->where('title', 'CONTAINS', $query));
+            } else {
+                return view('dashboard')->with('tickets', $user->tickets);
+            }   
         }
+        return view('dashboard')->with('tickets', $user->tickets);
         
     }
 

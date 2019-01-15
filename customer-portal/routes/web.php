@@ -27,5 +27,6 @@ Route::resource('accounts', 'AccountsController');
 
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/dashboard/{filter}', 'DashboardController@index');
+Route::post('/dashboard', 'DashboardController@index');
 
 Route::get('/account', 'AccountsController@index');

@@ -32,6 +32,7 @@
                 <div class="card-body">
                     <h3>Your tickets</h3>
 
+                    <span class="sub-header">Filter tickets on status:</span>
                     <div class="dropdown">
                         <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Filter tickets
@@ -41,7 +42,13 @@
                             <a class="dropdown-item" href="/dashboard/open">Show open</a>
                             <a class="dropdown-item" href="/dashboard/closed">Show closed</a>
                         </div>
-                      </div>
+                    </div>
+
+                    <span class="sub-header">Filter tickets with text:</span>
+                    {!!Form::open(['action' => ['DashboardController@index'], 'method' => 'POST'])!!}
+                        {{Form::text('query', '', ['class' => 'form-control'])}}
+                        {{Form::submit('Enter text', ['class' => 'btn btn-light'])}}
+                    {!!Form::close()!!}
 
                     @if(count($tickets) > 0)
                         <table class="table">
@@ -81,7 +88,7 @@
                             @endforeach
                         </table>
                     @else
-                        <p>You have no tickets</p>
+                        <p>You have no tickets or too many filters active.</p>
                     @endif
                 </div>
             </div>
