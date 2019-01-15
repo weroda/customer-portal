@@ -105,6 +105,41 @@
                     @endif
                 </div>
             </div>
+
+            {{-- Invoices --}}
+            <div class="card">
+                <div class="card-body">
+                    <h3>Your invoices</h3>
+
+                    @if(count($invoices) > 0)
+                        <table class="table">
+                            <tr>
+                                <th>Invoice</th>
+                                <th>#ID</th>
+                                <th>View</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            @foreach ($invoices as $invoice)
+                                <tr>
+                                    <td>{{$invoice->title}}</td>
+                                    <td>#{{$invoice->id}}</td>
+                                <td><a class="btn btn-primary" href="/tickets/{{$invoice->id}}">View</a></td>
+                                    <td><a class="btn btn-warning" href="/tickets/{{$invoice->id}}/edit">Edit</a></td>
+                                    <td>
+                                        {!!Form::open(['action' => ['InvoicesController@destroy', $ticket->id], 'method' => 'POST'])!!}
+                                            {{Form::hidden('_method', 'DELETE')}}
+                                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                        {!!Form::close()!!}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    @else
+                        <p>You have no invoices</p>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>

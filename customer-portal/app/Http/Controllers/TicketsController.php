@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Ticket;
+use App\Invoice;
 
 class TicketsController extends Controller
 {
@@ -27,7 +28,8 @@ class TicketsController extends Controller
     public function index(Request $request)
     {
         $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(10);
-        return view('dashboard')->with('tickets', $tickets);
+        $invoices = Invoice::orderBy('created_at', 'dsc')->paginate(10);
+        return view('dashboard')->with('invoices', $invoices, 'tickets', $tickets);
     }
 
     /**
