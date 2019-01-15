@@ -22,7 +22,7 @@
                     <h3>Hours on card: {{Auth::user()->ticket_stripes}}</h3>
                     <p>Hours will be written off when we processes your tickets.</p>
                     <p>
-                        Your card is currently <b>{{$user->ticket_stripes_activity}}</b><br/>
+                        Your card is currently <b>{{Auth::user()->ticket_stripes_activity}}</b><br/>
                         <small>Want to freeze your hours? <a href="/dashboard/toggle-card">Toggle activity</a></small>
                     </p>
                 </div>
