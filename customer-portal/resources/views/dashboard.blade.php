@@ -15,6 +15,18 @@
                     </div>
                 </div>
             @endif
+
+            {{-- Hours on card --}}
+            <div class="card">
+                <div class="card-body">
+                    <h3>Hours on card: {{Auth::user()->ticket_stripes}}</h3>
+                    <p>Hours will be written off when we processes your tickets.</p>
+                    <p>
+                        Your card is currently <b>{{$user->ticket_stripes_activity}}</b><br/>
+                        <small>Want to freeze your hours? <a href="/dashboard/toggle-card">Toggle activity</a></small>
+                    </p>
+                </div>
+            </div>
             
 
             {{-- Create new ticket --}}
@@ -27,7 +39,8 @@
                     <a class="btn btn-primary" href="/tickets/create">Create ticket</a>
                 </div>
             </div>
-
+            
+            {{-- Existing tickets --}}
             <div class="card">
                 <div class="card-body">
                     <h3>Your tickets</h3>

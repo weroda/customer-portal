@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/dashboard/toggle-card', 'AccountsController@toggleCard');
+
 Route::Get('/', 'PagesController@index');
 Route::Get('/about', 'PagesController@about');
 

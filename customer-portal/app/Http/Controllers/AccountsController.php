@@ -110,6 +110,23 @@ class AccountsController extends Controller
         return redirect('/account')->with('success', 'Account information updated successfully');
     }
 
+    public function toggleCard() {
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+
+        $currentActivity = $user->ticket_stripes_activity;
+        $setActivity = 'active';
+        if($currentActivity == 'active') {
+            $setActivity = 'inactive';
+        } else {
+            $setActivity = 'active';
+        }
+
+        $user->ticket_stripes_activity = $setActivity;
+        $user->save();
+        return redirect('/dashboard')->with('success', 'Your card hours has been updated to: ' . $setActivity);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

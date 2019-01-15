@@ -31,21 +31,21 @@ class DashboardController extends Controller
         
         if($filter == 'open') {
             if($query !== null) {
-                return view('dashboard')->with('tickets', $user->tickets->where('activity', 1)->where('title', 'LIKE', $query));
+                return view('dashboard')->with('tickets', $user->tickets->where('activity', 1)->where('title', 'LIKE', $query)->with('user', $user));
             } else {
-                return view('dashboard')->with('tickets', $user->tickets->where('activity', 1));
+                return view('dashboard')->with('tickets', $user->tickets->where('activity', 1)->with('user', $user));
             }            
         } elseif ($filter == 'closed') {
             if($query !== null) {
-                return view('dashboard')->with('tickets', $user->tickets->where('activity', 0)->where('title', 'LIKE', $query));
+                return view('dashboard')->with('tickets', $user->tickets->where('activity', 0)->where('title', 'LIKE', $query)->with('user', $user));
             } else {
-                return view('dashboard')->with('tickets', $user->tickets->where('activity', 0));
+                return view('dashboard')->with('tickets', $user->tickets->where('activity', 0))->with('user', $user);
             }   
         } else {
             if($query !== null) {
-                return view('dashboard')->with('tickets', $user->tickets->where('title', 'CONTAINS', $query));
+                return view('dashboard')->with('tickets', $user->tickets->where('title', 'CONTAINS', $query)->with('user', $user));
             } else {
-                return view('dashboard')->with('tickets', $user->tickets);
+                return view('dashboard')->with('tickets', $user->tickets)->with('user', $user);
             }   
         }
         return view('dashboard')->with('tickets', $user->tickets);
