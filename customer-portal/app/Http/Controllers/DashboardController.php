@@ -35,6 +35,9 @@ class DashboardController extends Controller
         $query = $request->input('query');
         $filter = $request->route('filter');
         
+        /**
+         * TODO: fix text query
+         */
         if($filter == 'open') {
             if($query !== null) {
                 return view('dashboard')->with('tickets', $user->tickets->where('activity', 1)->where('title', 'LIKE', $query)->with('user', $user)->with('invoices', $invoices));
