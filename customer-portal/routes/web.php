@@ -27,6 +27,11 @@ Auth::routes();
  */
 Route::resource('accounts', 'AccountsController');
 
+/**
+ * * Creates all routes for Invoices
+ */
+Route::resource('invoices', 'InvoicesController');
+
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/dashboard/{filter}', 'DashboardController@index');
 Route::post('/dashboard', 'DashboardController@index');
