@@ -27,7 +27,7 @@ h1 {
 /*
 * * Buttons
 */
-button.btn {
+button.btn, a.btn {
     &.btn-light {
         border: 1px solid $black;
     }

@@ -10533,7 +10533,8 @@ h1 {
 * * Buttons
 */
 
-button.btn.btn-light {
+button.btn.btn-light,
+a.btn.btn-light {
   border: 1px solid #4A4A4A;
 }
 

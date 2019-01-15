@@ -20,5 +20,12 @@ Route::Get('/about', 'PagesController@about');
 Route::resource('tickets', 'TicketsController');
 Auth::routes();
 
+/**
+ * * Creates all routes for Accounts
+ */
+Route::resource('accounts', 'AccountsController');
+
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/dashboard/{filter}', 'DashboardController@index');
+
+Route::get('/account', 'AccountsController@index');
