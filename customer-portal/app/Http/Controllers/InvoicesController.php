@@ -79,6 +79,7 @@ class InvoicesController extends Controller
         $invoice->body = $request->input('body');
         $invoice->user_id = auth()->user()->id;
         $invoice->pdf = $fileNameToStore;
+        $invoice->invoice_paid = false;
 
         /**
          * * Save the invoice
