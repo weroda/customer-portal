@@ -130,7 +130,7 @@ use App\Invoice; ?>
                                 </tr>
                                 @foreach ($invoices as $invoice)
                                     @if(auth()->user()->id == $invoice->user_id)
-                                        {{$invoicePaid = $invoice->invoice_paid === 0 ? "Unpaid" : "Paid"}}
+                                        {{$invoicePaid = $invoice->invoice_paid === 0 ? "Not paid" : "Paid"}}
                                         <tr>
                                             <td>{{$invoice->title}}</td>
                                             <td>{{$invoicePaid}}</td>
