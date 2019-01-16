@@ -2,45 +2,68 @@
 
 @section('content')
 
-    <a class="btn btn-primary" role="button" href="/dashboard">Go back</a>
+    <p class="btn-top">
+        <a class="btn btn-light btn-top" role="button" href="/dashboard"><i class="fas fa-angle-left"></i> Return to dashboard</a>
+    </p>
     
-    <h1>{{$ticket->title}}</h1>
+    <h1>
+        {{$ticket->title}}
+        <hr>
+        <p>Created: {{$ticket->created_at->format('d-m-Y')}} | By: {{$ticket->user->name}}</p>
+    </h1>
 
-    <p>{!!$ticket->body!!}</p>
-
-    <hr>
-
-    <small>Written on: {{$ticket->created_at}} | Written by: {{$ticket->user->name}}</small>
-
-    <hr>
-
-    <h2>Attachments</h2>
-
-    @if($ticket->attachment_1 !== '')
-        <span class="attachmentImageTitle">Attachment 1:</span>
-        <img src="/storage/attachment_images/{{$ticket->attachment_1}}" alt="">
-    @endif
-
-    @if($ticket->attachment_2 !== '')
-        <span class="attachmentImageTitle">Attachment 2:</span>
-        <img src="/storage/attachment_images/{{$ticket->attachment_2}}" alt="">
-    @endif
-    
-    @if($ticket->attachment_3 !== '')
-        <span class="attachmentImageTitle">Attachment 3:</span>
-        <img src="/storage/attachment_images/{{$ticket->attachment_3}}" alt="">
-    @endif
-    
-
-    @if(!Auth::guest())
-        @if(Auth::user()->id == $ticket->user_id)
-            <a class="btn btn-primary" href="/tickets/{{$ticket->id}}/edit">Edit</a>
+    <div class="card ticket-wrap">
+        <div class="card-content">
+            <p><strong>Ticket content:</strong></p>
+            <p>{!!$ticket->body!!}</p>
+        
+            <hr>
+        
+            @if($ticket->attachment_1 !== '' || $ticket->attachment_2 !== '' || $ticket->attachment_3 !== '')
+                <p><strong>Ticket attachments:</strong></p>
+        
+                <div class="card-attachments-container">
+                    @if($ticket->attachment_1 !== '')
+                        <div class="card card-attachment-container" style="width: 18rem;">
+                            <div class="card-content card-attachment">
+                                <span class="attachmentImageTitle">Attachment 1:</span> <br>
+                            <a href="/storage/attachment_images/{{$ticket->attachment_1}}">
+                                <div class="attachment-image-div" style="background-image: url('/storage/attachment_images/{{$ticket->attachment_1}}')"></div>
+                            </a>
+                            </div>
+                        </div>
+                    @endif
             
-            {!!Form::open(['action' => ['TicketsController@destroy', $ticket->id], 'method' => 'POST'])!!}
-                {{Form::hidden('_method', 'DELETE')}}
-                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-            {!!Form::close()!!}
+                    @if($ticket->attachment_2 !== '')
+                        <div class="card card-attachment-container" style="width: 18rem;">
+                            <div class="card-content card-attachment">
+                                <span class="attachmentImageTitle">Attachment 2:</span> <br>
+                            <a href="/storage/attachment_images/{{$ticket->attachment_2}}">
+                                <div class="attachment-image-div" style="background-image: url('/storage/attachment_images/{{$ticket->attachment_2}}')"></div>
+                            </a>
+                            </div>
+                        </div>
+                    @endif
+            
+                    @if($ticket->attachment_3 !== '')
+                        <div class="card card-attachment-container" style="width: 18rem;">
+                            <div class="card-content card-attachment">
+                                <span class="attachmentImageTitle">Attachment 3:</span> <br>
+                            <a href="/storage/attachment_images/{{$ticket->attachment_3}}">
+                                <div class="attachment-image-div" style="background-image: url('/storage/attachment_images/{{$ticket->attachment_3}}')"></div>
+                            </a>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            @endif
+        </div>
+    </div>
+        
+        @if(!Auth::guest())
+            @if(Auth::user()->id == $ticket->user_id)
+                <a class="btn btn-warning" href="/tickets/{{$ticket->id}}/edit">Edit this ticket</a>
+            @endif
         @endif
-    @endif
 
 @endsection 

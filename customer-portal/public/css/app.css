@@ -10546,6 +10546,10 @@ input.btn.btn-light {
   margin-top: 10px;
 }
 
+p.btn-top {
+  text-align: center;
+}
+
 /*
 * * Card
 */
@@ -10564,6 +10568,29 @@ div.card span.ticket-closed {
   font-size: 10px;
   padding: 5px;
   font-weight: bold;
+}
+
+div.card.ticket-wrap {
+  padding: 25px;
+  background-color: white;
+}
+
+div.card-attachments-container {
+  text-align: center;
+}
+
+div.card-attachments-container div.card-attachment-container {
+  display: inline-block;
+  margin-top: 0;
+}
+
+div.card-attachments-container div.card-attachment-container div.card-attachment {
+  padding: 15px;
+}
+
+div.card-attachments-container div.card-attachment-container div.card-attachment div.attachment-image-div {
+  height: 10rem;
+  background-position: center;
 }
 
 /**
