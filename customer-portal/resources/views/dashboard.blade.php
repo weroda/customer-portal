@@ -124,13 +124,16 @@ use App\Invoice; ?>
                             <table class="table">
                                 <tr>
                                     <th>Invoice</th>
+                                    <th>Status</th>
                                     <th>#ID</th>
                                     <th class="text-right">Download</th>
                                 </tr>
                                 @foreach ($invoices as $invoice)
                                     @if(auth()->user()->id == $invoice->user_id)
+                                        {{$invoicePaid = $invoice->invoice_paid === 0 ? "Unpaid" : "Paid"}}
                                         <tr>
                                             <td>{{$invoice->title}}</td>
+                                            <td>{{$invoicePaid}}</td>
                                             <td>#{{$invoice->id}}</td>
                                             <td class="text-right"><a target="_blank" class="btn btn-primary" href="/storage/attachment_images/{{$invoice->pdf}}">Download</a></td>
                                         </tr>
