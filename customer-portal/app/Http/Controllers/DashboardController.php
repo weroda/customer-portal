@@ -40,21 +40,27 @@ class DashboardController extends Controller
          */
         if($filter == 'open') {
             if($query !== null) {
-                return view('dashboard')->with('tickets', $user->tickets->where('activity', 1)->where('title', 'LIKE', $query)->with('user', $user)->with('invoices', $invoices));
+
+                return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets->where('title', 'LIKE', $query)->where('acitivity', 1));
             } else {
-                return view('dashboard')->with('tickets', $user->tickets->where('activity', 1)->with('user', $user)->with('invoices', $invoices));
+                // ! WERKT
+                return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets->where('activity'), 1);
             }            
         } elseif ($filter == 'closed') {
             if($query !== null) {
-                return view('dashboard')->with('tickets', $user->tickets->where('activity', 0)->where('title', 'LIKE', $query)->with('user', $user)->with('invoices', $invoices));
+                // ! WERKT
+                return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets->where('title', 'LIKE', $query)->where('acitivity', 0));
             } else {
-                return view('dashboard')->with('tickets', $user->tickets->where('activity', 0))->with('user', $user)->with('invoices', $invoices);
+                // ! WERKT
+                return view('dashboard')->with('invoices', $invoices)->with('tickets', $user->tickets->where('activity', 0));
             }   
         } else {
             if($query !== null) {
-                return view('dashboard')->with('tickets', $user->tickets->where('title', 'CONTAINS', $query)->with('user', $user)->with('invoices', $invoices));
+                // ! WERKT
+                return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets->where('title', 'LIKE', $query));
             } else {
-                return view('dashboard')->with('tickets', $user->tickets)->with('user', $user)->with('invoices', $invoices);
+                // ! WERKT
+                return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets);
             }   
         }
 

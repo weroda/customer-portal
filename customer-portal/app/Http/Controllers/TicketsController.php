@@ -134,7 +134,8 @@ class TicketsController extends Controller
     public function show($id)
     {
         $ticket = Ticket::find($id);
-        return view('tickets.show')->with('ticket', $ticket);
+        $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(10);
+        return view('tickets.show')->with('ticket', $ticket, 'tickets', $tickets);
     }
 
     /**
@@ -146,6 +147,7 @@ class TicketsController extends Controller
     public function edit($id)
     {
         $ticket = Ticket::find($id);
+        $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(10);
 
         /**
          * ! Make sure user is authorized to make changes
@@ -155,7 +157,7 @@ class TicketsController extends Controller
             return redirect('/tickets')->with('error', 'You do not have permission to view this page.');    
         }
 
-        return view('tickets.edit')->with('ticket', $ticket);
+        return view('tickets.edit')->with('ticket', $ticket, 'tickets', $tickets);
     }
 
     /**

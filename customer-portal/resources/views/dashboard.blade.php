@@ -1,3 +1,8 @@
+<?php 
+use App\Ticket;
+use App\Invoice; ?>
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -63,6 +68,11 @@
                         {{Form::submit('Enter text', ['class' => 'btn btn-light'])}}
                     {!!Form::close()!!}
 
+                    <?php 
+                    if(!$tickets) {
+                        $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(10);
+                    }
+                    ?>
                     @if(count($tickets) > 0)
                         <table class="table">
                             <tr>
@@ -111,6 +121,11 @@
                 <div class="card-body">
                     <h3>Your invoices</h3>
 
+                    <?php 
+                    if(!$invoices) {
+                        $invoices =  Invoice::orderBy('created_at', 'dsc')->paginate(10);
+                    }
+                    ?>
                     @if($invoices)
                         @if(count($invoices) > 0)
                             <table class="table">
