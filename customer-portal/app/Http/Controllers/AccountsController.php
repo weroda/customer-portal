@@ -119,6 +119,7 @@ class AccountsController extends Controller
 
         if($request->input('role') !== '') {
             $user->role = $request->input('role');
+            $user->ticket_stripes = $request->input('ticket_stripes');
         }
 
         $user->save();

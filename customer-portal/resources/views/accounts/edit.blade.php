@@ -8,7 +8,7 @@
                 
                 <h1>Welcome, {{$user->name}}</h1>
     
-                <a class="btn btn-light" href="/dashboard"><i class="fas fa-angle-left"></i> Return to admin page</a>
+                <a class="btn btn-light" href="/admin"><i class="fas fa-angle-left"></i> Return to admin page</a>
     
                 {!! Form::open(['action' => ['AccountsController@update', $user->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                     <div class="form-group">
@@ -30,8 +30,12 @@
                     <div class="form-group">
                         {{Form::label('role', 'Role')}}
                         {{Form::select('role', array(0 => 'User', 1 => 'Admin'), null, ['class' => 'form-control'])}}
-
                     </div>
+                    <div class="form-group">
+                        {{Form::label('hours', 'Hours')}}
+                        {{Form::number('ticket_stripes', $user->ticket_stripes, ['class' => 'form-control'])}}
+                    </div>
+
                     {{Form::hidden('_method', 'PUT')}}
                     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
     
