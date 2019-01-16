@@ -123,6 +123,7 @@ class AccountsController extends Controller
         }
 
         $user->ticket_stripes_activity = $setActivity;
+        $user->user_role = 0;
         $user->save();
         return redirect('/dashboard')->with('success', 'Your card hours has been updated to: ' . $setActivity);
     }

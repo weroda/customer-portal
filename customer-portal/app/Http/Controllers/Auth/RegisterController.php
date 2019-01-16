@@ -68,7 +68,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'ticket_stripes' => 0,
-            'ticket_stripes_activity' => 'active'
+            'ticket_stripes_activity' => 'active',
+            'role' => 0,
         ]);
     }
 }
