@@ -70,7 +70,7 @@ use App\Invoice; ?>
 
                     <?php 
                     if(!$tickets) {
-                        $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(10);
+                        $tickets =  Ticket::orderBy('created_at', 'dsc');
                     }
                     ?>
                     @if(count($tickets) > 0)
@@ -83,31 +83,34 @@ use App\Invoice; ?>
                                 <th>Delete</th>
                             </tr>
                             @foreach ($tickets as $ticket)
-                                <?php
-                                    $message = '';
-                                    $active = '';
-                                    if($ticket->activity == 0) {
-                                        $active = 'disabled';
-                                        $message = 'CLOSED';
-                                    }
-                                ?>
-                                <tr>
-                                    <td>
-                                        {{$ticket->title}} <br>
-                                        @if($message !== '')
-                                            <span class="ticket-closed">{{$message}}</span>
-                                        @endif
-                                    </td>
-                                    <td>#{{$ticket->id}}</td>
-                                <td><a class="btn btn-primary" href="/tickets/{{$ticket->id}}">View</a></td>
-                                    <td><a class="btn btn-warning {{$active}}" href="/tickets/{{$ticket->id}}/edit">Edit</a></td>
-                                    <td>
-                                        {!!Form::open(['action' => ['TicketsController@destroy', $ticket->id], 'method' => 'POST'])!!}
-                                            {{Form::hidden('_method', 'DELETE')}}
-                                            {{Form::submit('Delete', ['class' => 'btn btn-danger ' . $active])}}
-                                        {!!Form::close()!!}
-                                    </td>
-                                </tr>
+                                @if(auth()->user()->id == $ticket->user_id)
+                                    <?php
+                                        $message = '';
+                                        $active = '';
+                                        if($ticket->activity == 0) {
+                                            $active = 'disabled';
+                                            $message = 'CLOSED';
+                                        }
+                                    ?>
+                                    
+                                    <tr>
+                                        <td>
+                                            {{$ticket->title}} <br>
+                                            @if($message !== '')
+                                                <span class="ticket-closed">{{$message}}</span>
+                                            @endif
+                                        </td>
+                                        <td>#{{$ticket->id}}</td>
+                                    <td><a class="btn btn-primary" href="/tickets/{{$ticket->id}}">View</a></td>
+                                        <td><a class="btn btn-warning {{$active}}" href="/tickets/{{$ticket->id}}/edit">Edit</a></td>
+                                        <td>
+                                            {!!Form::open(['action' => ['TicketsController@destroy', $ticket->id], 'method' => 'POST'])!!}
+                                                {{Form::hidden('_method', 'DELETE')}}
+                                                {{Form::submit('Delete', ['class' => 'btn btn-danger ' . $active])}}
+                                            {!!Form::close()!!}
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </table>
                     @else
@@ -123,7 +126,7 @@ use App\Invoice; ?>
 
                     <?php 
                     if(!$invoices) {
-                        $invoices =  Invoice::orderBy('created_at', 'dsc')->paginate(10);
+                        $invoices =  Invoice::orderBy('created_at', 'dsc');
                     }
                     ?>
                     @if($invoices)
@@ -135,11 +138,13 @@ use App\Invoice; ?>
                                     <th class="text-right">Download</th>
                                 </tr>
                                 @foreach ($invoices as $invoice)
-                                    <tr>
-                                        <td>{{$invoice->title}}</td>
-                                        <td>#{{$invoice->id}}</td>
-                                        <td class="text-right"><a target="_blank" class="btn btn-primary" href="/storage/attachment_images/{{$invoice->pdf}}">Download</a></td>
-                                    </tr>
+                                    @if(auth()->user()->id == $invoice->user_id)
+                                        <tr>
+                                            <td>{{$invoice->title}}</td>
+                                            <td>#{{$invoice->id}}</td>
+                                            <td class="text-right"><a target="_blank" class="btn btn-primary" href="/storage/attachment_images/{{$invoice->pdf}}">Download</a></td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </table>
                         @else

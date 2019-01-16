@@ -27,8 +27,8 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(10);
-        $invoices = Invoice::orderBy('created_at', 'dsc')->paginate(10);
+        $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(1000);
+        $invoices = Invoice::orderBy('created_at', 'dsc')->paginate(1000);
 
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
@@ -40,26 +40,20 @@ class DashboardController extends Controller
          */
         if($filter == 'open') {
             if($query !== null) {
-
                 return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets->where('title', 'LIKE', $query)->where('acitivity', 1));
             } else {
-                // ! WERKT
                 return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets->where('activity'), 1);
             }            
         } elseif ($filter == 'closed') {
             if($query !== null) {
-                // ! WERKT
                 return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets->where('title', 'LIKE', $query)->where('acitivity', 0));
             } else {
-                // ! WERKT
                 return view('dashboard')->with('invoices', $invoices)->with('tickets', $user->tickets->where('activity', 0));
             }   
         } else {
             if($query !== null) {
-                // ! WERKT
                 return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets->where('title', 'LIKE', $query));
             } else {
-                // ! WERKT
                 return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets);
             }   
         }
