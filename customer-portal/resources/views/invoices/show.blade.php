@@ -18,6 +18,7 @@
 
     @if($invoice->pdf !== '')
         <span class="attachmentImageTitle">View invoice:</span>
+        <a href="/storage/attachment_images/{{$invoice->pdf}}" download>Download</a>
         <img src="/storage/attachment_images/{{$invoice->pdf}}" alt="">
     @endif
 

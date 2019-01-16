@@ -26,7 +26,7 @@ class InvoicesController extends Controller
     {
         $invoices = Invoice::orderBy('created_at', 'dsc')->paginate(10);
         $tickets =  Ticket::orderBy('created_at', 'dsc')->paginate(10);
-        return view('dashboard')->with('tickets', $tickets, 'invoices', $invoices);
+        return view('dashboard')->with('tickets', $tickets)->with('invoices', $invoices);
     }
 
     /**
