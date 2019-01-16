@@ -35,5 +35,9 @@ class PagesController extends Controller
         );
         return view('pages.about')->with($data);
     }
+
+    public function tickets() {
+        return redirect('dashboard');
+    }
     
 }

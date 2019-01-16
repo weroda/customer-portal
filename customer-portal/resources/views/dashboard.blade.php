@@ -69,7 +69,7 @@ use App\Invoice; ?>
                     {!!Form::close()!!}
 
                     <?php 
-                    if(!$tickets) {
+                    if(!isset($tickets)) {
                         $tickets =  Ticket::orderBy('created_at', 'dsc');
                     }
                     ?>

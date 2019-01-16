@@ -37,3 +37,5 @@ Route::get('/dashboard/{filter}', 'DashboardController@index');
 Route::post('/dashboard', 'DashboardController@index');
 
 Route::get('/account', 'AccountsController@index');
+
+Route::get('/tickets', 'PagesController@tickets');
