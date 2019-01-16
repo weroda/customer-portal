@@ -34,10 +34,14 @@ class DashboardController extends Controller
         $user = User::find($user_id);
         $query = $request->input('query');
         $filter = $request->route('filter');
+
+        $filterInvoice = $request->route('test');
+        if($filterInvoice == 'paid') {
+            return view('dashboard')->with('tickets', $tickets)->with('invoices', $invoices->where('invoice_paid', 1));
+        } elseif($filterInvoice == 'not-paid') {
+            return view('dashboard')->with('tickets', $tickets)->with('invoices', $invoices->where('invoice_paid', 0));
+        }
         
-        /**
-         * TODO: fix text query
-         */
         if($filter == 'open') {
             if($query !== null) {
                 return view('dashboard')->with('invoices', $invoices)->with('tickets', $tickets->where('title', 'LIKE', $query)->where('acitivity', 1));

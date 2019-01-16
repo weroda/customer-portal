@@ -32,6 +32,8 @@ Route::resource('accounts', 'AccountsController');
  */
 Route::resource('invoices', 'InvoicesController');
 
+Route::get('/dashboard/invoice-filter/{test}', 'DashboardController@index');
+
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/dashboard/{filter}', 'DashboardController@index');
 Route::post('/dashboard', 'DashboardController@index');

@@ -119,6 +119,18 @@ use App\Invoice; ?>
                 <div class="card-body">
                     <h3>Your invoices</h3>
 
+                    <span class="sub-header">Filter invoices on status:</span>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Filter invoices
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/">Show all</a>
+                            <a class="dropdown-item" href="/dashboard/invoice-filter/paid">Show paid</a>
+                            <a class="dropdown-item" href="/dashboard/invoice-filter/not-paid">Show not paid</a>
+                        </div>
+                    </div>
+
                     @if($invoices)
                         @if(count($invoices) > 0)
                             <table class="table">
@@ -130,7 +142,7 @@ use App\Invoice; ?>
                                 </tr>
                                 @foreach ($invoices as $invoice)
                                     @if(auth()->user()->id == $invoice->user_id)
-                                        {{$invoicePaid = $invoice->invoice_paid === 0 ? "Not paid" : "Paid"}}
+                                        <?php if($invoice->invoice_paid === 0) { $invoicePaid = "Not Paid"; } else { $invoicePaid = "Paid"; } ?>
                                         <tr>
                                             <td>{{$invoice->title}}</td>
                                             <td>{{$invoicePaid}}</td>
