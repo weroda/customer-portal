@@ -15,6 +15,7 @@ Route::get('/dashboard/toggle-card', 'AccountsController@toggleCard');
 
 Route::Get('/', 'PagesController@index');
 Route::Get('/about', 'PagesController@about');
+Route::Get('/admin', 'PagesController@admin');
 
 /**
  * * Creates all routes for Tickets

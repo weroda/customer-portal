@@ -60,7 +60,8 @@ class AccountsController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('accounts.show')->with('user', $user);
     }
 
     /**
@@ -71,7 +72,16 @@ class AccountsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        /**
+         * ! Make sure user is admin
+         */
+        if(auth()->user()->role !== 1) {
+            return redirect('/dashboard')->with('error', 'You do not have permission to view this page');
+        }
+
+        return view('accounts.edit')->with('user', $user);
     }
 
     /**
@@ -87,7 +97,8 @@ class AccountsController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'nullable',
-            'password-confirm' => 'nullable'
+            'password-confirm' => 'nullable',
+            'role' => 'nullable'
         ]);
 
         /*
@@ -105,7 +116,19 @@ class AccountsController extends Controller
         } else {
             return redirect('/account')->with('error', 'Passwords do not match');    
         }
+
+        if($request->input('role') !== '') {
+            $user->role = $request->input('role');
+        }
+
         $user->save();
+
+        /**
+         * ! Check if use is admin to redirect to admin page
+         */
+        if(auth()->user()->role == 1) {
+            return redirect('/admin')->with('success', 'Account information updated successfully');
+        }
 
         return redirect('/account')->with('success', 'Account information updated successfully');
     }
@@ -136,6 +159,15 @@ class AccountsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        /**
+         * ! Make sure user is admin
+         */
+        if(auth()->user()->role !== 1) {
+            return redirect('/dashboard')->with('error', 'You do not have permission to view this page');
+        }
+
+        $user->delete();
+        return redirect('/admin')->with('success', 'User removed successfully');
     }
 }

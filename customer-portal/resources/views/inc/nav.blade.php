@@ -46,11 +46,15 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 
+                                @if(Auth::user()->role === 1)
+                                    <a class="dropdown-item" href="/admin">Admin</a>
+                                @endif
+
                                 <a class="dropdown-item" href="/account">Account</a>
                                 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 

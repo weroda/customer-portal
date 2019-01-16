@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ticket;
 use App\Invoice;
+use App\User;
 
 class PagesController extends Controller
 {
@@ -25,6 +26,14 @@ class PagesController extends Controller
     public function index() 
     {
         return redirect('/dashboard');
+    }
+
+    public function admin()
+    {
+        $users = User::all();
+        $tickets = Ticket::all();
+        $invoices = Invoice::all();
+        return view('pages.admin')->with('users', $users)->with('invoices', $invoices)->with('tickets', $tickets);
     }
 
     public function about()
