@@ -68,11 +68,6 @@ use App\Invoice; ?>
                         {{Form::submit('Enter text', ['class' => 'btn btn-light'])}}
                     {!!Form::close()!!}
 
-                    <?php 
-                    if(!isset($tickets)) {
-                        $tickets =  Ticket::orderBy('created_at', 'dsc');
-                    }
-                    ?>
                     @if(count($tickets) > 0)
                         <table class="table">
                             <tr>
@@ -124,11 +119,6 @@ use App\Invoice; ?>
                 <div class="card-body">
                     <h3>Your invoices</h3>
 
-                    <?php 
-                    if(!$invoices) {
-                        $invoices =  Invoice::orderBy('created_at', 'dsc');
-                    }
-                    ?>
                     @if($invoices)
                         @if(count($invoices) > 0)
                             <table class="table">
