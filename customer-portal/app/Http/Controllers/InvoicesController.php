@@ -112,11 +112,10 @@ class InvoicesController extends Controller
         $invoice = Invoice::find($id);
         /**
          * ! Make sure user is authorized to make changes
-         * * Check if user owns the invoice
-         * TODO: Check if user == admin
+         * * Check if admin
          */
-        if(auth()->user()->id !== $invoice->user_id) {
-            return redirect('/invoices')->with('error', 'You do not have permission to view this page.');
+        if(auth()->user()->role !== 1) {
+            return redirect('/invoices')->with('error', 'You do not have permission to edit this invoice.');
         }
 
         return view('invoices.edit')->with('invoice', $invoice);

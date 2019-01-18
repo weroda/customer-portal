@@ -26,6 +26,9 @@ class PagesController extends Controller
      */
     public function index() 
     {
+        if(auth::user()->role == 1) {
+            return redirect('/admin');
+        }
         return redirect('/dashboard');
     }
 

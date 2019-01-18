@@ -152,6 +152,7 @@
                         <th>Invoice</th>
                         <th class="text-right">Status</th>
                         <th class="text-right">#ID</th>
+                        <th class="text-right">Edit</th>
                         <th class="text-right">Download</th>
                     </tr>
                     @foreach ($invoices as $invoice)
@@ -161,6 +162,7 @@
                             <td>{{$invoice->title}}</td>
                             <td class="text-right">{{$invoicePaid}}</td>
                             <td class="text-right">#{{$invoice->id}}</td>
+                            <td class="text-right"><a class="btn btn-warning" href="/invoices/{{$invoice->id}}/edit">Edit</a></td>
                             <td class="text-right"><a target="_blank" class="btn btn-primary" href="/storage/attachment_images/{{$invoice->pdf}}">Download</a></td>
                         </tr>
                         @endif
@@ -184,6 +186,7 @@
                         <th>Invoice</th>
                         <th class="text-right">Status</th>
                         <th class="text-right">#ID</th>
+                        <th class="text-right">Edit</th>
                         <th class="text-right">Download</th>
                     </tr>
                     @foreach ($invoices as $invoice)
@@ -193,6 +196,7 @@
                             <td>{{$invoice->title}}</td>
                             <td class="text-right">{{$invoicePaid}}</td>
                             <td class="text-right">#{{$invoice->id}}</td>
+                            <td class="text-right"><a class="btn btn-warning" href="/invoices/{{$invoice->id}}/edit">Edit</a></td>
                             <td class="text-right"><a target="_blank" class="btn btn-primary" href="/storage/attachment_images/{{$invoice->pdf}}">Download</a></td>
                         </tr>
                         @endif
