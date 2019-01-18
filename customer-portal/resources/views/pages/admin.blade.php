@@ -141,4 +141,68 @@
     <p>No closed tickets. Feels good.</p>
 @endif
 
+{{-- Invoices paid --}}
+<div class="card">
+    <div class="card-content">
+        <h3>Invoices: not paid</h3>
+        @if($invoices)
+            @if(count($invoices) > 0)
+                <table class="table">
+                    <tr>
+                        <th>Invoice</th>
+                        <th class="text-right">Status</th>
+                        <th class="text-right">#ID</th>
+                        <th class="text-right">Download</th>
+                    </tr>
+                    @foreach ($invoices as $invoice)
+                        @if($invoice->invoice_paid == 0)
+                        <?php if($invoice->invoice_paid === 0) { $invoicePaid = "Not Paid"; } else { $invoicePaid = "Paid"; } ?>
+                        <tr>
+                            <td>{{$invoice->title}}</td>
+                            <td class="text-right">{{$invoicePaid}}</td>
+                            <td class="text-right">#{{$invoice->id}}</td>
+                            <td class="text-right"><a target="_blank" class="btn btn-primary" href="/storage/attachment_images/{{$invoice->pdf}}">Download</a></td>
+                        </tr>
+                        @endif
+                    @endforeach
+                </table>
+            @else
+                <p>You have no invoices</p>
+            @endif
+        @endif
+    </div>
+</div>
+
+{{-- Invoices not paid --}}
+<div class="card">
+    <div class="card-content">
+        <h3>Invoices: paid</h3>
+        @if($invoices)
+            @if(count($invoices) > 0)
+                <table class="table">
+                    <tr>
+                        <th>Invoice</th>
+                        <th class="text-right">Status</th>
+                        <th class="text-right">#ID</th>
+                        <th class="text-right">Download</th>
+                    </tr>
+                    @foreach ($invoices as $invoice)
+                        @if($invoice->invoice_paid == 1)
+                        <?php if($invoice->invoice_paid === 0) { $invoicePaid = "Not Paid"; } else { $invoicePaid = "Paid"; } ?>
+                        <tr>
+                            <td>{{$invoice->title}}</td>
+                            <td class="text-right">{{$invoicePaid}}</td>
+                            <td class="text-right">#{{$invoice->id}}</td>
+                            <td class="text-right"><a target="_blank" class="btn btn-primary" href="/storage/attachment_images/{{$invoice->pdf}}">Download</a></td>
+                        </tr>
+                        @endif
+                    @endforeach
+                </table>
+            @else
+                <p>You have no invoices</p>
+            @endif
+        @endif
+    </div>
+</div>
+
 @endsection
