@@ -3,13 +3,17 @@
 @section('content')
 
     <p class="btn-top">
-        <a class="btn btn-light btn-top" role="button" href="/dashboard"><i class="fas fa-angle-left"></i> Return to dashboard</a>
+        @if(auth()->user()->role === 1)
+            <a class="btn btn-light btn-top" role="button" href="/admin"><i class="fas fa-angle-left"></i> Return to admin dashboard</a>
+        @else
+            <a class="btn btn-light btn-top" role="button" href="/dashboard"><i class="fas fa-angle-left"></i> Return to dashboard</a>
+        @endif
     </p>
     
     <h1>
         {{$ticket->title}}
         <hr>
-        <p>Created: {{$ticket->created_at->format('d-m-Y')}} | By: {{$ticket->user->name}}</p>
+        <p>Created at: {{$ticket->created_at->format('d-m-Y')}}</p>
     </h1>
 
     <div class="card ticket-wrap">

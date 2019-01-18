@@ -151,8 +151,11 @@ class TicketsController extends Controller
 
         /**
          * ! Make sure user is authorized to make changes
-         * Check if the client owns the ticket
+         * Check if the client owns the ticket or if admin is making request
          */
+        if(auth()->user()->role === 1) {
+            return view('tickets.edit')->with('ticket', $ticket, 'tickets', $tickets);
+        }
         if(auth()->user()->id !== $ticket->user_id) {
             return redirect('/tickets')->with('error', 'You do not have permission to view this page.');    
         }
@@ -189,7 +192,11 @@ class TicketsController extends Controller
         $ticket->activity = $activity;
         $ticket->save();
 
-        return redirect('/tickets')->with('success', 'Ticket Updated');
+        if(auth()->user()->role === 1) {
+            return redirect('/admin')->with('success', 'Ticket updated successfully');
+        }
+
+        return redirect('/tickets')->with('success', 'Ticket updated successfully');
     }
 
     /**
@@ -204,8 +211,12 @@ class TicketsController extends Controller
         
         /**
          * ! Make sure user is authorized to make changes
-         * Check if the client owns the ticket
+         * Check if the client owns the ticket or admin is making request
          */
+        if(auth()->user()->role === 1) {
+            $ticket->delete();
+            return redirect('/admin')->with('success', 'Ticket removed successfully');
+        }
         if(auth()->user()->id !== $ticket->user_id) {
             return redirect('/tickets')->with('error', 'You do not have permission to view this page.');    
         }

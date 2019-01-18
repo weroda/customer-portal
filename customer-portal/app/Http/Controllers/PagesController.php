@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Ticket;
 use App\Invoice;
 use App\User;
@@ -30,10 +31,25 @@ class PagesController extends Controller
 
     public function admin()
     {
-        $users = User::all();
-        $tickets = Ticket::all();
+        $users = DB::table('users')
+            ->paginate(5, ['*'], 'users');
+
+
+        $openTickets = DB::table('tickets')
+            ->where('activity', 1)
+            ->paginate(5, ['*'], 'openTickets');
+
+        $closedTickets = DB::table('tickets')
+            ->where('activity', 0)
+            ->paginate(5, ['*'], 'closedTickets');
+
         $invoices = Invoice::all();
-        return view('pages.admin')->with('users', $users)->with('invoices', $invoices)->with('tickets', $tickets);
+
+        return view('pages.admin')
+            ->with('users', $users)
+            ->with('invoices', $invoices)
+            ->with('openTickets', $openTickets)
+            ->with('closedTickets', $closedTickets);
     }
 
     public function about()
