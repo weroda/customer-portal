@@ -5,10 +5,12 @@
     <h1>Edit ticket</h1>
 
     {!! Form::open(['action' => ['TicketsController@update', $ticket->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-        <div class="form-group">
-                {{Form::label('activity', 'Open')}} <br>
-                {{Form::checkbox('activity', 'Open', $ticket->activity)}}
-        </div>
+        @if(auth()->user()->role == 1)
+                <div class="form-group">
+                        {{Form::label('activity', 'Open')}} <br>
+                        {{Form::checkbox('activity', 'Open', $ticket->activity)}}
+                </div>
+        @endif
         <div class="form-group">
                 {{Form::label('title', 'Title')}}
                 {{Form::text('title', $ticket->title, ['class' => 'form-control', 'placeholder' => 'Title'])}}
