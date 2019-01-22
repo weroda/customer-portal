@@ -92,7 +92,7 @@ class InvoicesController extends Controller
          */
         $invoice->save();
 
-        return redirect('/invoices')->with('success', 'Invoice Created');
+        return redirect('/admin')->with('success', 'Invoice Created');
     }
 
     /**

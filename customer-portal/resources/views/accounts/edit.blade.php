@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('hours', 'Hours')}}
-                        {{Form::number('ticket_stripes', $user->ticket_stripes, ['class' => 'form-control'])}}
+                        {{Form::text('ticket_stripes', $user->ticket_stripes, ['class' => 'form-control'])}}
                     </div>
 
                     {{Form::hidden('_method', 'PUT')}}
