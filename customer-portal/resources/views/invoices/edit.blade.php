@@ -5,6 +5,11 @@
     <h1>Edit invoice</h1>
 
     {!! Form::open(['action' => ['InvoicesController@update', $invoice->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        
+        <div class="form-group">
+                {{Form::label('invoice_paid', 'Invoice paid')}} <br>
+                {{Form::checkbox('invoice_paid', 'Invoice paid', $invoice->invoice_paid)}}
+        </div>
         <div class="form-group">
                 {{Form::label('title', 'Title')}}
                 {{Form::text('title', $invoice->title, ['class' => 'form-control', 'placeholder' => 'Title'])}}

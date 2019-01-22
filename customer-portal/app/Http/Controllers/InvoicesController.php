@@ -147,13 +147,19 @@ class InvoicesController extends Controller
         $invoice = Invoice::find($id);
         $invoice->title = $request->input('title');
         $invoice->body = $request->input('body');
+        // invoice paid check
+        $invoice_paid = true;
+        if($request->input('invoice_paid') == null) {
+            $invoice_paid = false;
+        }
+        $invoice->invoice_paid = $invoice_paid;
 
         /**
          * * Save the invoice
          */
         $invoice->save();
 
-        return redirect('/invoices')->with('success', 'Invoice updated');
+        return redirect('/admin')->with('success', 'Invoice updated');
     }
 
     /**
