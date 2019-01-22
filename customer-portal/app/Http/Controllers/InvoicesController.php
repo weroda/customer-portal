@@ -39,20 +39,9 @@ class InvoicesController extends Controller
     public function create()
     {
         $users = User::orderBy('created_at', 'dsc')->paginate(false);
+        $dropdown = User::pluck('name', 'id');
 
-        // echo($users[0]->name);
-        // echo($users[0]->id);
-        // $idArray = [$users[0]->id];
-        // $array = array_fill_keys($idArray, $users[0]->name);
-        // echo("<br><br>");
-        // var_dump($array);
-        // $usersIDArray = [];
-        // foreach($users as $user) {
-        //     $usersIDArray.array_push($user->id);
-        // }
-
-
-        return view('invoices.create')->with('users', $users);
+        return view('invoices.create')->with('users', $users)->with('dropdown', $dropdown);
     }
 
     /**
@@ -67,6 +56,7 @@ class InvoicesController extends Controller
             'title' => 'required',
             'body' => 'required',
             'pdf' => 'required|mimes:pdf|max:1999',
+            'user' => 'required'
         ]);
 
         /**
@@ -93,7 +83,7 @@ class InvoicesController extends Controller
         $invoice = new Invoice;
         $invoice->title = $request->input('title');
         $invoice->body = $request->input('body');
-        $invoice->user_id = auth()->user()->id;
+        $invoice->user_id = $request->input('user');
         $invoice->pdf = $fileNameToStore;
         $invoice->invoice_paid = false;
 
