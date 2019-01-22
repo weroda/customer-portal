@@ -10633,3 +10633,12 @@ nav.navbar li.nav-item a.nav-link:focus {
   color: #f8fafc;
 }
 
+/**
+* Comments
+*/
+
+span.ticket_stripes_removed {
+  color: green;
+  font-weight: bold;
+}
+

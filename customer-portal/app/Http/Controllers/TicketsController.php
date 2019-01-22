@@ -186,8 +186,10 @@ class TicketsController extends Controller
         
         // ticket activity check
         $activity = true;
-        if($request->input('activity') == null) {
-            $activity = false;
+        if(auth()->user()->role === 1) {
+            if($request->input('activity') == null) {
+                $activity = false;
+            }
         }
         $ticket->activity = $activity;
         $ticket->save();

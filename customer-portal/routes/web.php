@@ -42,3 +42,7 @@ Route::post('/dashboard', 'DashboardController@index');
 Route::get('/account', 'AccountsController@index');
 
 Route::get('/tickets', 'PagesController@tickets');
+
+	
+Route::get('/post/{id}', 'PostsController@show')->name('posts.show');
+Route::resource('comments', 'CommentsController');

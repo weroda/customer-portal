@@ -63,6 +63,38 @@
             @endif
         </div>
     </div>
+
+    <h3>Comments</h3>
+    @forelse ($ticket->comments as $comment)
+        <div class="card ticket-wrap">
+            <div class="card-content">
+                <p>{{ $comment->user->name }} {{$comment->created_at}}</p>
+                <p>{{ $comment->body }}</p>
+                @if($comment->user->role == 1)
+                    <span class="ticket_stripes_removed">Time spent: {{ $comment->ticket_stripes_removed }}</span>
+                @endif
+            </div>
+        </div>
+        @empty
+        <p>This post has no comments</p>
+    @endforelse
+
+    <h3>New comment</h3>
+    @if (Auth::check())
+        {{ Form::open(['route' => ['comments.store'], 'method' => 'POST']) }}
+        {{-- {{ Form::textarea('body', old('body'))}} --}}
+        {{ Form::label('body', 'Comment content')}}
+        {{ Form::textarea('body', '', ['class' => 'form-control', 'placeholder' => 'Ticket information'])}}
+        @if(auth()->user()->role == 1)
+            {{ Form::label('ticket_stripes_removed', 'Time spent')}}
+            {{ Form::text('ticket_stripes_removed', '0', ['class' => 'form-control'])}}
+        @endif
+        {{ Form::hidden('ticket_id', $ticket->id) }}
+
+        <br>
+        {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+        {{ Form::close() }}
+    @endif  
         
         @if(!Auth::guest())
             @if(Auth::user()->id == $ticket->user_id)
