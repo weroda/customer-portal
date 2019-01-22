@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use App\Invoice;
 use App\Ticket;
+use App\User;
 
 class InvoicesController extends Controller
 {
@@ -36,7 +38,21 @@ class InvoicesController extends Controller
      */
     public function create()
     {
-        return view('invoices.create');
+        $users = User::orderBy('created_at', 'dsc')->paginate(false);
+
+        // echo($users[0]->name);
+        // echo($users[0]->id);
+        // $idArray = [$users[0]->id];
+        // $array = array_fill_keys($idArray, $users[0]->name);
+        // echo("<br><br>");
+        // var_dump($array);
+        // $usersIDArray = [];
+        // foreach($users as $user) {
+        //     $usersIDArray.array_push($user->id);
+        // }
+
+
+        return view('invoices.create')->with('users', $users);
     }
 
     /**

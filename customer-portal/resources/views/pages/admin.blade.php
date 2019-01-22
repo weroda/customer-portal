@@ -141,6 +141,15 @@
     <p>No closed tickets. Feels good.</p>
 @endif
 
+{{-- Create invoice --}}
+<div class="card">
+    <div class="card-content">
+        <h3>Create invoice</h3>
+        <p>Let's collect some money</p>
+        <a class="btn btn-primary" href="/invoices/create">Create</a>
+    </div>
+</div>
+
 {{-- Invoices paid --}}
 <div class="card">
     <div class="card-content">
