@@ -98,7 +98,8 @@ class AccountsController extends Controller
             'email' => 'required',
             'password' => 'nullable',
             'password-confirm' => 'nullable',
-            'role' => 'nullable'
+            'role' => 'nullable',
+            'ticket_stripes' => 'nullable'
         ]);
 
         /*
@@ -119,6 +120,16 @@ class AccountsController extends Controller
 
         if($request->input('role') !== '') {
             $user->role = $request->input('role');
+            // $user->ticket_stripes = $request->input('ticket_stripes');
+        }
+
+        if(!$request->input('role')) {
+            $user->role = 0;
+        }
+
+        if(!$request->input('ticket_stripes')) {
+            $user->ticket_stripes = $user->ticket_stripes;
+        } else {
             $user->ticket_stripes = $request->input('ticket_stripes');
         }
 
