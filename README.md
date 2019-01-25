@@ -52,4 +52,5 @@
   - Comment on ticket including time spent to write time off of users card;
   - Close or re-open tickets;
 - Change invoice to paid or not paid;
+  - Remove invoices.
 
